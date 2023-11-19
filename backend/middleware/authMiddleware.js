@@ -1,4 +1,4 @@
-import { jwt } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import User from '../models/userModel.js';
 
 //protect routes
@@ -14,7 +14,7 @@ import User from '../models/userModel.js';
         req.user = await User.findById(decoded.userId).select('-password');
         next();  
     }catch(error){
-        res.status(401);
+        res.status(401).json("token failed");
         throw new Error('Not authorized, token failed');
 
        }
